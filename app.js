@@ -2,11 +2,15 @@
 
 
 const express = require("express");
+const companiesRoutes = require("./routes/companies")
+const invoicesRoutes = require("./routes/invoices")
 
 const app = express();
 const ExpressError = require("./expressError")
 
 app.use(express.json());
+app.use("/companies", companiesRoutes)
+app.use("/invoices", invoicesRoutes)
 
 
 /** 404 handler */
@@ -25,6 +29,10 @@ app.use((err, req, res, next) => {
     error: err,
     message: err.message
   });
+});
+
+app.listen(3000, function() {
+  console.log(`app on port 3000`);
 });
 
 
